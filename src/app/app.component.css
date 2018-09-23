@@ -1,0 +1,13 @@
+.appContainer {
+  color: #fff;
+  font-family: 'Syncopate', cursive;
+}
+
+.deckContainer {
+  width: 100%;
+  text-align: center;
+}
+
+.drawButton {
+  display: inline-block;
+}

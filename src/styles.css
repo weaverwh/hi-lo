@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+}
+
+body {
+  background:
+    -webkit-linear-gradient(315deg, hsla(135.11, 96.2%, 41.47%, 1) 0%, hsla(135.11, 96.2%, 41.47%, 0) 70%),
+    -webkit-linear-gradient(65deg, hsla(287.27, 96.62%, 43.82%, 1) 10%, hsla(287.27, 96.62%, 43.82%, 0) 80%),
+    -webkit-linear-gradient(135deg, hsla(155.02, 91.12%, 46.84%, 1) 15%, hsla(155.02, 91.12%, 46.84%, 0) 80%),
+    -webkit-linear-gradient(205deg, hsla(194.22, 97.52%, 40.22%, 1) 100%, hsla(194.22, 97.52%, 40.22%, 0) 70%);
+  background:
+    linear-gradient(135deg, hsla(135.11, 96.2%, 41.47%, 1) 0%, hsla(135.11, 96.2%, 41.47%, 0) 70%),
+    linear-gradient(25deg, hsla(287.27, 96.62%, 43.82%, 1) 10%, hsla(287.27, 96.62%, 43.82%, 0) 80%),
+    linear-gradient(315deg, hsla(155.02, 91.12%, 46.84%, 1) 15%, hsla(155.02, 91.12%, 46.84%, 0) 80%),
+    linear-gradient(245deg, hsla(194.22, 97.52%, 40.22%, 1) 100%, hsla(194.22, 97.52%, 40.22%, 0) 70%);
+}
+
+.button {
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DeckService } from './services/deck.service';
+import { DeckService, DeckResponse } from './services/deck.service';
 
 @Component({
   selector: 'app-root',
@@ -15,13 +15,12 @@ export class AppComponent implements OnInit {
     private deckService: DeckService
   ) {}
 
-  title: string = 'Hi - Lo: Ultimate Edition';
-
   buildNewDeck = () => {
     console.log(this.deckService);
     this.deckService.fetchNewDeck()
     .subscribe(
-      (response) => {
+      (response: DeckResponse) => {
+        this.deckService.setDeckId(response.deck_id);
         console.log(response);
       },
       (error) => {
@@ -30,7 +29,19 @@ export class AppComponent implements OnInit {
     );
   };
 
-  ngOnInit(){
+  drawCard = () => {
+    this.deckService.fetchCard()
+    .subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  };
+
+  ngOnInit() {
     this.buildNewDeck();
   };
 
