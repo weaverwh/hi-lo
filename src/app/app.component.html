@@ -2,5 +2,18 @@
 <div class="appContainer">
   <div class="deckContainer">
     <a class="button drawButton" (click)="drawCard()">Draw Card</a>
+    <div class="drawnCardContainer">
+      <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'discarding': card.discarding, 'discarded': card.discarded}">
+        <div class="cardHeader">
+          <span class="cardSuit">{{card.suit}}</span>
+        </div>
+        <div class="cardBody">
+          <span class="cardNumber">{{card.value}}</span>
+        </div>
+        <div class="cardFooter">
+          <span class="cardSuit">{{card.suit}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

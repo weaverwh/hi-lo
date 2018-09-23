@@ -5,9 +5,73 @@
 
 .deckContainer {
   width: 100%;
-  text-align: center;
 }
 
 .drawButton {
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 125px;
+  text-align: center;
+}
+
+.drawnCardContainer {
+  margin-top: 50px;
+}
+
+.card {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid #fff;
+  border-radius: 3px;
+  display: block;
+  width: 110px;
+  height: 180px;
+  padding: 15px 20px 15px 20px;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.card.active {
+  margin: 0 auto;
+  opacity: 1;
+  transform: translate(0px, 25px);
+}
+
+.card.discarding {
+  opacity: 0;
+  transform: translate(50px, 25px);
+}
+
+.card.discarded {
+  display: none;
+}
+
+.cardHeader {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 10px;
+  text-align: left;
+  line-height: 30px;
+}
+
+.cardBody {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  line-height: 75px;
+}
+
+.cardFooter {
+  border-top: 1px solid #fff;
+  padding-top: 10px;
+  text-align: right;
+  line-height: 30px;
+}
+
+.cardSuit {
+  font-size: 12px;
+}
+
+.cardNumber {
+  font-size: 24px;
 }

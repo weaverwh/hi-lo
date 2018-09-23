@@ -2,10 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 export interface DeckResponse {
-  "success": boolean,
-  "deck_id": string,
-  "shuffled": boolean,
-  "remaining": number
+  success: boolean,
+  deck_id: string,
+  shuffled: boolean,
+  remaining: number
+}
+
+export interface DrawResponse {
+  cards: any,
+  deck_id: string,
+  remaining: number,
+  success: boolean
 }
 
 @Injectable({
