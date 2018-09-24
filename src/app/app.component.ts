@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
         } else {
           this.guessCorrect = true;
         }
-        this.updateGameMessage();
+        this.updateGameMessage(false);
         setTimeout(() => {
           this.displayNewCard();
         }, 10);
@@ -156,23 +156,27 @@ export class AppComponent implements OnInit {
   };
 
   updateGameMessage = (pass) => {
-    if (this.numberOfCards > 1) {
-      if (pass) {
-        this.gameMessage = 'Passed! Keep drawing!';
-      } else {
-        if (this.guessCorrect) {
-          let message: string = 'Correct!';
-          if (this.numberOfCorrectGuesses > 1) {
-            message += ' ' + this.numberOfCorrectGuesses + ' guesses in a row!';
-            this.updateEncourager();
-          }
-          this.gameMessage = message;
-        } else {
-          this.gameMessage = 'Woops! Wrong guess!';
-        }
-      }
+    if (this.numberOfRemainingCards === 0) {
+      this.gameOver();
     } else {
-      this.gameMessage = 'Good luck!';
+      if (this.numberOfCards > 1) {
+        if (pass) {
+          this.gameMessage = 'Passed! Keep drawing!';
+        } else {
+          if (this.guessCorrect) {
+            let message: string = 'Correct!';
+            if (this.numberOfCorrectGuesses > 1) {
+              message += ' ' + this.numberOfCorrectGuesses + ' guesses in a row!';
+              this.updateEncourager();
+            }
+            this.gameMessage = message;
+          } else {
+            this.gameMessage = 'Woops! Wrong guess!';
+          }
+        }
+      } else {
+        this.gameMessage = 'Good luck!';
+      }
     }
   };
 
@@ -204,6 +208,16 @@ export class AppComponent implements OnInit {
         break;
       default:
         this.encourager = 'Have mercy!';
+    }
+  };
+
+  gameOver = () => {
+    if (this.player1.score < this.player2.score) {
+      this.gameMessage = 'Game Over! Player 1 Wins!';
+    } else if (this.player1.score > this.player2.score) {
+      this.gameMessage = 'Game Over! Player 2 Wins!';
+    } else if (this.player1.score === this.player2.score) {
+      this.gameMessage = 'Game Over! We have a tie!';
     }
   };
 
