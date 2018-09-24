@@ -6,7 +6,7 @@
     <span class="deckInfo cardsDrawn">{{(0 -numberOfRemainingCards) + 52}} cards drawn</span>
     <div class="drawnCardsContainer">
       <div class="cardContainer">
-        <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'played': card.played, 'discarding': card.discarding, 'discarded': card.discarded}">
+        <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'played': card.played, 'discardingLeft': (card.discarding && player1.turnActive), 'discardingRight': (card.discarding && player2.turnActive), 'discarded': card.discarded}">
           <div class="cardHeader">
             <span class="cardSuit">{{card.suit}}</span>
           </div>
@@ -28,9 +28,9 @@
     <div class="gameButtons">
       <a class="button gameButton guessHigherButton" [ngClass]="{'active': numberOfCards > 0 && guessCorrect}" (click)="guessHigher()">Higher!</a>
       <a class="button gameButton guessLowerButton" [ngClass]="{'active': numberOfCards > 0 && guessCorrect}" (click)="guessLower()">Lower!</a>
-      <a class="button gameButton passButton" [ngClass]="{'active': numberOfCorrectGuesses > 2}" (click)="pass()">Pass!</a>
+      <a class="button gameButton passButton" [ngClass]="{'active': numberOfCorrectGuesses > 2 && guessCorrect}" (click)="pass()">Pass!</a>
     </div>
-    <div class="encourager" [ngClass]="{'active': numberOfCorrectGuesses > 1}">
+    <div class="encourager" [ngClass]="{'active': numberOfCorrectGuesses > 1 && guessCorrect}">
       <span>{{encourager}}</span>
     </div>
     <div class="reset" [ngClass]="{'active': numberOfCorrectGuesses > 1}">

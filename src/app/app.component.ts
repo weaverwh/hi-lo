@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   numberOfCards: number = 0;
   gameMessage: string = 'Draw a card to start playing!';
   guessCorrect: boolean = true;
-  encourager: string = '';
+  encourager: string = 'Good!';
   numberOfCorrectGuesses: number = 0;
   numberOfRemainingCards: number = 52;
 
@@ -130,7 +130,7 @@ export class AppComponent implements OnInit {
     this.numberOfCorrectGuesses = 0;
     setTimeout(() => {
       this.discardStack();
-    }, 2000);
+    }, 1500);
   };
 
   discardStack = () => {
@@ -219,6 +219,7 @@ export class AppComponent implements OnInit {
     } else if (this.player1.score === this.player2.score) {
       this.gameMessage = 'Game Over! We have a tie!';
     }
+    this.guessCorrect = false;
   };
 
   resetGame = () => {
