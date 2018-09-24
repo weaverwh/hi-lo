@@ -51,13 +51,30 @@ export class AppComponent implements OnInit {
     .subscribe(
       (response: DrawResponse) => {
         console.log(response);
+        switch (response.cards[0].value) {
+          case 'JACK':
+            response.cards[0].rawValue = 11;
+            break;
+          case 'QUEEN':
+            response.cards[0].rawValue = 12;
+            break;
+          case 'KING':
+            response.cards[0].rawValue = 13;
+            break;
+          case 'ACE':
+            response.cards[0].rawValue = 14;
+            break;
+          default:
+            response.cards[0].rawValue = parseInt(response.cards[0].value);
+            break;
+        }
         this.drawnCards.push(response.cards[0]);
         //Read the length only once when necessary
         this.numberOfCards = this.drawnCards.length;
         if (this.numberOfCards > 1) {
-          if (guess === 'higher' && this.drawnCards[this.numberOfCards -1].value > this.drawnCards[this.numberOfCards - 2].value) {
+          if (guess === 'higher' && this.drawnCards[this.numberOfCards -1].rawValue > this.drawnCards[this.numberOfCards - 2].rawValue) {
             this.handleCorrectGuess();
-          } else if (guess === 'lower' && this.drawnCards[this.numberOfCards -1].value < this.drawnCards[this.numberOfCards - 2].value) {
+          } else if (guess === 'lower' && this.drawnCards[this.numberOfCards -1].rawValue < this.drawnCards[this.numberOfCards - 2].rawValue) {
             this.handleCorrectGuess();
           } else {
             this.handleIncorrectGuess();
@@ -113,9 +130,22 @@ export class AppComponent implements OnInit {
       this.drawnCards[this.numberOfCards - 1].discarding = true;
       setTimeout(() => {
         this.drawnCards[this.numberOfCards - 1].discarded = true;
+        this.updateScore();
         this.drawnCards = [];
         this.numberOfCards = 0;
       }, 500);
+    }
+  };
+
+  updateScore = () => {
+    if (this.player1.turnActive) {
+      this.player1.score += this.numberOfCards;
+      this.player1.turnActive = false;
+      this.player2.turnActive = true;
+    } else if (this.player2.turnActive) {
+      this.player2.score += this.numberOfCards;
+      this.player2.turnActive = false;
+      this.player1.turnActive = true;
     }
   };
 
