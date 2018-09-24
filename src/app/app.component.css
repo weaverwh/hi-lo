@@ -33,13 +33,13 @@
 .cardsRemaining {
   float: left;
   text-align: left;
-  left: 390px;
+  left: 340px;
 }
 
 .cardsDrawn {
   float: right;
   text-align: right;
-  right: 390px;
+  right: 340px;
 }
 
 .drawnCardsContainer {
@@ -232,7 +232,7 @@
 
 .player {
   background: rgba(0,0,0,0.2);
-  width: 300px;
+  width: 250px;
   border-radius: 3px;
   text-align: center;
 }
