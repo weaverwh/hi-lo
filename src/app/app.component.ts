@@ -113,6 +113,13 @@ export class AppComponent implements OnInit {
     this.drawCard('lower');
   };
 
+  pass = () => {
+    this.player1.turnActive = !this.player1.turnActive;
+    this.player2.turnActive = !this.player2.turnActive;
+    this.numberOfCorrectGuesses = 0;
+    this.updateGameMessage(true)
+  };
+
   handleCorrectGuess = () => {
     this.guessCorrect = true;
     this.numberOfCorrectGuesses++;
@@ -150,48 +157,55 @@ export class AppComponent implements OnInit {
     }
   };
 
-  updateGameMessage = () => {
-    let message: string = '';
+  updateGameMessage = (pass) => {
     if (this.numberOfCards > 1) {
-      if (this.guessCorrect) {
-        message = 'Correct!';
-        if (this.numberOfCorrectGuesses > 1) {
-          message += ' ' + this.numberOfCorrectGuesses + ' guesses in a row!';
-          switch (this.numberOfCorrectGuesses) {
-            case 2:
-              this.encourager = 'Good!';
-              break;
-            case 3:
-              this.encourager = 'Great!';
-              break;
-            case 4:
-              this.encourager = 'Excellent!';
-              break;
-            case 5:
-              this.encourager = 'Awesome!';
-              break;
-            case 6:
-              this.encourager = 'Superb!';
-              break;
-            case 7:
-              this.encourager = 'Incredible!';
-              break;
-            case 8:
-              this.encourager = 'Outstanding!';
-              break;
-            case 9:
-              this.encourager = 'Unbelievable!';
-              break;
-            default:
-              this.encourager = 'Have mercy!';
-          }
-        }
-        this.gameMessage = message;
+      if (pass) {
+        this.gameMessage = 'Passed! Keep drawing!';
       } else {
-        this.gameMessage = 'Woops! Wrong guess!';
+        if (this.guessCorrect) {
+          let message: string = 'Correct!';
+          if (this.numberOfCorrectGuesses > 1) {
+            message += ' ' + this.numberOfCorrectGuesses + ' guesses in a row!';
+            this.updateEncourager();
+          }
+          this.gameMessage = message;
+        } else {
+          this.gameMessage = 'Woops! Wrong guess!';
+        }
       }
     } else {
       this.gameMessage = 'Good luck!';
+    }
+  };
+
+  updateEncourager = () => {
+    switch (this.numberOfCorrectGuesses) {
+      case 2:
+        this.encourager = 'Good!';
+        break;
+      case 3:
+        this.encourager = 'Great!';
+        break;
+      case 4:
+        this.encourager = 'Excellent!';
+        break;
+      case 5:
+        this.encourager = 'Awesome!';
+        break;
+      case 6:
+        this.encourager = 'Superb!';
+        break;
+      case 7:
+        this.encourager = 'Incredible!';
+        break;
+      case 8:
+        this.encourager = 'Outstanding!';
+        break;
+      case 9:
+        this.encourager = 'Unbelievable!';
+        break;
+      default:
+        this.encourager = 'Have mercy!';
     }
   };
 

@@ -28,7 +28,7 @@
     <div class="gameButtons">
       <a class="button gameButton guessHigherButton" [ngClass]="{'active': numberOfCards > 0 && guessCorrect}" (click)="guessHigher()">Higher!</a>
       <a class="button gameButton guessLowerButton" [ngClass]="{'active': numberOfCards > 0 && guessCorrect}" (click)="guessLower()">Lower!</a>
-      <a class="button gameButton passButton" (click)="pass()">Pass!</a>
+      <a class="button gameButton passButton" [ngClass]="{'active': numberOfCorrectGuesses > 2}" (click)="pass()">Pass!</a>
     </div>
     <div class="encourager" [ngClass]="{'active': numberOfCorrectGuesses > 1}">
       <span>{{encourager}}</span>
