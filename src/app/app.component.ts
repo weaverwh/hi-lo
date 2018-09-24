@@ -38,7 +38,6 @@ export class AppComponent implements OnInit {
     .subscribe(
       (response: DeckResponse) => {
         this.deckService.setDeckId(response.deck_id);
-        console.log(response);
       },
       (error) => {
         console.log(error);
@@ -50,7 +49,6 @@ export class AppComponent implements OnInit {
     this.deckService.fetchCard()
     .subscribe(
       (response: DrawResponse) => {
-        console.log(response);
         switch (response.cards[0].value) {
           case 'JACK':
             response.cards[0].rawValue = 11;
@@ -68,9 +66,22 @@ export class AppComponent implements OnInit {
             response.cards[0].rawValue = parseInt(response.cards[0].value);
             break;
         }
+        switch (response.cards[0].suit) {
+          case 'SPADES':
+            response.cards[0].suitIcon = '♠';
+            break;
+          case 'CLUBS':
+            response.cards[0].suitIcon = '♣';
+            break;
+          case 'DIAMONDS':
+            response.cards[0].suitIcon = '♦';
+            break;
+          case 'HEARTS':
+            response.cards[0].suitIcon = '♥';
+            break;
+        }
         this.drawnCards.push(response.cards[0]);
         this.numberOfRemainingCards--;
-        //Read the length only once when necessary
         this.numberOfCards = this.drawnCards.length;
         if (this.numberOfCards > 1) {
           if (guess === 'higher' && this.drawnCards[this.numberOfCards -1].rawValue > this.drawnCards[this.numberOfCards - 2].rawValue) {
@@ -98,11 +109,18 @@ export class AppComponent implements OnInit {
     if (this.numberOfCards > 1) {
       this.drawnCards[this.numberOfCards - 2].played = true;
       setTimeout(() => {
-        this.drawnCards[this.numberOfCards - 1].active = true;
+        this.activateCard();
       }, 250);
     } else {
-      this.drawnCards[this.numberOfCards - 1].active = true;
+      this.activateCard();
     }
+  };
+
+  activateCard = () => {
+    this.drawnCards[this.numberOfCards - 1].active = true;
+    setTimeout(() => {
+      this.drawnCards[this.numberOfCards - 1].suitIconActive = true;
+    }, 250);
   };
 
   guessHigher = () => {
@@ -249,6 +267,7 @@ export class AppComponent implements OnInit {
       score: 0,
       turnActive: false
     };
+    this.buildNewDeck();
   };
 
   ngOnInit() {

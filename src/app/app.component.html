@@ -9,12 +9,14 @@
         <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'played': card.played, 'discardingLeft': (card.discarding && player1.turnActive), 'discardingRight': (card.discarding && player2.turnActive), 'discarded': card.discarded}">
           <div class="cardHeader">
             <span class="cardSuit">{{card.suit}}</span>
+            <span class="suitIcon" [ngClass]="{'active': card.suitIconActive}">{{card.suitIcon}}</span>
           </div>
           <div class="cardBody">
             <span class="cardNumber">{{card.value}}</span>
           </div>
           <div class="cardFooter">
             <span class="cardSuit">{{card.suit}}</span>
+            <span class="suitIcon" [ngClass]="{'active': card.suitIconActive}">{{card.suitIcon}}</span>
           </div>
         </div>
       </div>

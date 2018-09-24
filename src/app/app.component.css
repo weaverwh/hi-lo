@@ -116,6 +116,36 @@
   font-size: 12px;
 }
 
+.suitIcon {
+  font-size: 24px;
+  opacity: 0;
+  position: relative;
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.suitIcon.active {
+  opacity: 1;
+}
+
+.cardHeader .suitIcon {
+  left: 25px;
+  float: right;
+}
+
+.cardFooter .suitIcon {
+  right: 25px;
+  float: left;
+}
+
+.cardHeader .suitIcon.active {
+  transform: translate(-25px, 0px);
+}
+
+.cardFooter .suitIcon.active {
+  transform: translate(25px, 0px);
+}
+
 .cardNumber {
   font-size: 24px;
 }
@@ -236,6 +266,9 @@
   text-transform: uppercase;
   line-height: 50px;
   font-size: 14px;
+  opacity: 1;
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
 }
 
 .playerStatus.inactive {
