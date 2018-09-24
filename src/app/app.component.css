@@ -22,6 +22,26 @@
   pointer-events: auto;
 }
 
+.deckInfo {
+  position: relative;
+  display: block;
+  font-size: 14px;
+  top: -50px;
+  line-height: 50px;
+}
+
+.cardsRemaining {
+  float: left;
+  text-align: left;
+  left: 390px;
+}
+
+.cardsDrawn {
+  float: right;
+  text-align: right;
+  right: 390px;
+}
+
 .drawnCardsContainer {
 
 }

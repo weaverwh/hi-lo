@@ -2,6 +2,8 @@
 <div class="appContainer">
   <div class="deckContainer">
     <a class="button drawButton" (click)="drawCard()" [ngClass]="{'active': numberOfCards === 0}">Start Round</a>
+    <span class="deckInfo cardsRemaining">{{numberOfRemainingCards}} cards remaining</span>
+    <span class="deckInfo cardsDrawn">{{(0 -numberOfRemainingCards) + 52}} cards drawn</span>
     <div class="drawnCardsContainer">
       <div class="cardContainer">
         <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'played': card.played, 'discarding': card.discarding, 'discarded': card.discarded}">

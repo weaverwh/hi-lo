@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   guessCorrect: boolean = true;
   encourager: string = '';
   numberOfCorrectGuesses: number = 0;
+  numberOfRemainingCards: number = 52;
 
   player1: any = {
     score: 0,
@@ -33,7 +34,6 @@ export class AppComponent implements OnInit {
   };
 
   buildNewDeck = () => {
-    console.log(this.deckService);
     this.deckService.fetchNewDeck()
     .subscribe(
       (response: DeckResponse) => {
@@ -69,6 +69,7 @@ export class AppComponent implements OnInit {
             break;
         }
         this.drawnCards.push(response.cards[0]);
+        this.numberOfRemainingCards--;
         //Read the length only once when necessary
         this.numberOfCards = this.drawnCards.length;
         if (this.numberOfCards > 1) {
