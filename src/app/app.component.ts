@@ -146,9 +146,11 @@ export class AppComponent implements OnInit {
   handleIncorrectGuess = () => {
     this.guessCorrect = false;
     this.numberOfCorrectGuesses = 0;
-    setTimeout(() => {
-      this.discardStack();
-    }, 1500);
+    if (this.numberOfRemainingCards > 0) {
+      setTimeout(() => {
+        this.discardStack();
+      }, 1500);
+    }
   };
 
   discardStack = () => {
