@@ -32,4 +32,18 @@
       <span>{{encourager}}</span>
     </div>
   </div>
+  <div class="playerContainer">
+    <div class="player player1">
+      <span class="playerTitle">Player 1</span>
+      <span class="playerScore">Score: {{player1.score}}</span>
+      <span class="playerStatus" *ngIf="player1.turnActive">Currently Your Turn</span>
+      <span class="playerStatus inactive" *ngIf="!player1.turnActive">Player 2's Turn</span>
+    </div>
+    <div class="player player2">
+      <span class="playerTitle">Player 2</span>
+      <span class="playerScore">Score: {{player2.score}}</span>
+      <span class="playerStatus" *ngIf="player2.turnActive">Currently Your Turn</span>
+      <span class="playerStatus inactive" *ngIf="!player2.turnActive">Player 1's Turn</span>
+    </div>
+  </div>
 </div>

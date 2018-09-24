@@ -22,6 +22,16 @@ export class AppComponent implements OnInit {
   encourager: string = '';
   numberOfCorrectGuesses: number = 0;
 
+  player1: any = {
+    score: 0,
+    turnActive: true
+  };
+
+  player2: any = {
+    score: 0,
+    turnActive: false
+  };
+
   buildNewDeck = () => {
     console.log(this.deckService);
     this.deckService.fetchNewDeck()
@@ -52,8 +62,10 @@ export class AppComponent implements OnInit {
           } else {
             this.handleIncorrectGuess();
           }
-          this.updateGameMessage();
+        } else {
+          this.guessCorrect = true;
         }
+        this.updateGameMessage();
         setTimeout(() => {
           this.displayNewCard();
         }, 10);
@@ -147,6 +159,8 @@ export class AppComponent implements OnInit {
       } else {
         this.gameMessage = 'Woops! Wrong guess!';
       }
+    } else {
+      this.gameMessage = 'Good luck!';
     }
   };
 

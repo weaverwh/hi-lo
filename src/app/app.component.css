@@ -161,3 +161,53 @@
 .passButton {
   margin-top: 15px;
 }
+
+.playerContainer {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  right: 0px;
+  pointer-events: none;
+}
+
+.player {
+  background: rgba(0,0,0,0.2);
+  width: 300px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.player span {
+  display: block;
+}
+
+.player1 {
+  float: left;
+  margin-left: 50px;
+}
+
+.player2 {
+  float: right;
+  margin-right: 50px;
+}
+
+.playerTitle {
+  text-transform: uppercase;
+  line-height: 50px;
+  font-size: 18px;
+}
+
+.playerScore {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.playerStatus {
+  text-transform: uppercase;
+  line-height: 50px;
+  font-size: 14px;
+}
+
+.playerStatus.inactive {
+  opacity: 0.5;
+}
