@@ -13,19 +13,34 @@
   margin-top: 50px;
   width: 125px;
   text-align: center;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.drawnCardContainer {
-  margin-top: 50px;
+.drawButton.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawnCardsContainer {
+
+}
+
+.cardContainer {
+  position: relative;
+  display: block;
+  width: 152px;
+  margin: 0 auto;
 }
 
 .card {
+  position: absolute;
+  width: 110px;
+  height: 180px;
   background: rgba(0,0,0,0.2);
   border: 1px solid #fff;
   border-radius: 3px;
   display: block;
-  width: 110px;
-  height: 180px;
   padding: 15px 20px 15px 20px;
   opacity: 0;
   transition: all 0.5s ease-out;
@@ -35,12 +50,16 @@
 .card.active {
   margin: 0 auto;
   opacity: 1;
-  transform: translate(0px, 25px);
+  transform: translate(0px, 50px);
+}
+
+.card.played {
+  opacity: 0;
 }
 
 .card.discarding {
   opacity: 0;
-  transform: translate(50px, 25px);
+  transform: translate(50px, 50px);
 }
 
 .card.discarded {
@@ -74,4 +93,71 @@
 
 .cardNumber {
   font-size: 24px;
+}
+
+.pileSize {
+  margin-top: 315px;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.pileSize.active {
+  opacity: 1;
+}
+
+.gameMessage {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.encourager {
+  margin-top: 50px;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.encourager.active {
+  opacity: 1;
+}
+
+.gameButtons {
+  padding-top: 50px;
+  width: 260px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.gameButton {
+  width: 100px;
+}
+
+.guessHigherButton,
+.guessLowerButton,
+.passButton {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.guessHigherButton.active,
+.guessLowerButton.active,
+.passButton.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.guessHigherButton {
+  float: left;
+}
+
+.guessLowerButton {
+  float: right;
+}
+
+.passButton {
+  margin-top: 15px;
 }

@@ -1,19 +1,35 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="appContainer">
   <div class="deckContainer">
-    <a class="button drawButton" (click)="drawCard()">Draw Card</a>
-    <div class="drawnCardContainer">
-      <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'discarding': card.discarding, 'discarded': card.discarded}">
-        <div class="cardHeader">
-          <span class="cardSuit">{{card.suit}}</span>
-        </div>
-        <div class="cardBody">
-          <span class="cardNumber">{{card.value}}</span>
-        </div>
-        <div class="cardFooter">
-          <span class="cardSuit">{{card.suit}}</span>
+    <a class="button drawButton" (click)="drawCard()" [ngClass]="{'active': numberOfCards === 0}">Start Round</a>
+    <div class="drawnCardsContainer">
+      <div class="cardContainer">
+        <div class="card" *ngFor="let card of drawnCards" [ngClass]="{'active': card.active, 'played': card.played, 'discarding': card.discarding, 'discarded': card.discarded}">
+          <div class="cardHeader">
+            <span class="cardSuit">{{card.suit}}</span>
+          </div>
+          <div class="cardBody">
+            <span class="cardNumber">{{card.value}}</span>
+          </div>
+          <div class="cardFooter">
+            <span class="cardSuit">{{card.suit}}</span>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="pileSize" [ngClass]="{'active': numberOfCards > 0}">
+      <span>{{numberOfCards + (numberOfCards === 1 ? ' card' : ' cards')}} in the pile</span>
+    </div>
+    <div class="gameMessage">
+      <span>{{gameMessage}}</span>
+    </div>
+    <div class="gameButtons">
+      <a class="button gameButton guessHigherButton" [ngClass]="{'active': numberOfCards > 0 && guessCorrect}" (click)="guessHigher()">Higher!</a>
+      <a class="button gameButton guessLowerButton" [ngClass]="{'active': numberOfCards > 0 && guessCorrect}" (click)="guessLower()">Lower!</a>
+      <a class="button gameButton passButton" (click)="pass()">Pass!</a>
+    </div>
+    <div class="encourager" [ngClass]="{'active': numberOfCorrectGuesses > 1}">
+      <span>{{encourager}}</span>
     </div>
   </div>
 </div>

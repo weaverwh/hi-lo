@@ -17,6 +17,10 @@ export class AppComponent implements OnInit {
 
   drawnCards: any = [];
   numberOfCards: number = 0;
+  gameMessage: string = 'Draw a card to start playing!';
+  guessCorrect: boolean = true;
+  encourager: string = '';
+  numberOfCorrectGuesses: number = 0;
 
   buildNewDeck = () => {
     console.log(this.deckService);
@@ -32,23 +36,26 @@ export class AppComponent implements OnInit {
     );
   };
 
-  drawCard = () => {
+  drawCard = (guess) => {
     this.deckService.fetchCard()
     .subscribe(
       (response: DrawResponse) => {
         console.log(response);
         this.drawnCards.push(response.cards[0]);
+        //Read the length only once when necessary
         this.numberOfCards = this.drawnCards.length;
-        setTimeout(() => {
-          if (this.numberOfCards > 1) {
-            this.drawnCards[this.numberOfCards - 2].discarding = true;
-            setTimeout(() => {
-              this.drawnCards[this.numberOfCards - 2].discarded = true;
-              this.displayNewCard();
-            }, 500);
+        if (this.numberOfCards > 1) {
+          if (guess === 'higher' && this.drawnCards[this.numberOfCards -1].value > this.drawnCards[this.numberOfCards - 2].value) {
+            this.handleCorrectGuess();
+          } else if (guess === 'lower' && this.drawnCards[this.numberOfCards -1].value < this.drawnCards[this.numberOfCards - 2].value) {
+            this.handleCorrectGuess();
           } else {
-            this.displayNewCard();
+            this.handleIncorrectGuess();
           }
+          this.updateGameMessage();
+        }
+        setTimeout(() => {
+          this.displayNewCard();
         }, 10);
       },
       (error) => {
@@ -58,7 +65,89 @@ export class AppComponent implements OnInit {
   };
 
   displayNewCard = () => {
-    this.drawnCards[this.numberOfCards - 1].active = true;
+    if (this.numberOfCards > 1) {
+      this.drawnCards[this.numberOfCards - 2].played = true;
+      setTimeout(() => {
+        this.drawnCards[this.numberOfCards - 1].active = true;
+      }, 250);
+    } else {
+      this.drawnCards[this.numberOfCards - 1].active = true;
+    }
+  };
+
+  guessHigher = () => {
+    this.drawCard('higher');
+  };
+
+  guessLower = () => {
+    this.drawCard('lower');
+  };
+
+  handleCorrectGuess = () => {
+    this.guessCorrect = true;
+    this.numberOfCorrectGuesses++;
+  };
+
+  handleIncorrectGuess = () => {
+    this.guessCorrect = false;
+    this.numberOfCorrectGuesses = 0;
+    setTimeout(() => {
+      this.discardStack();
+    }, 2000);
+  };
+
+  discardStack = () => {
+    if (this.numberOfCards > 1) {
+      this.drawnCards[this.numberOfCards - 1].discarding = true;
+      setTimeout(() => {
+        this.drawnCards[this.numberOfCards - 1].discarded = true;
+        this.drawnCards = [];
+        this.numberOfCards = 0;
+      }, 500);
+    }
+  };
+
+  updateGameMessage = () => {
+    let message: string = '';
+    if (this.numberOfCards > 1) {
+      if (this.guessCorrect) {
+        message = 'Correct!';
+        if (this.numberOfCorrectGuesses > 1) {
+          message += ' ' + this.numberOfCorrectGuesses + ' guesses in a row!';
+          switch (this.numberOfCorrectGuesses) {
+            case 2:
+              this.encourager = 'Good!';
+              break;
+            case 3:
+              this.encourager = 'Great!';
+              break;
+            case 4:
+              this.encourager = 'Excellent!';
+              break;
+            case 5:
+              this.encourager = 'Awesome!';
+              break;
+            case 6:
+              this.encourager = 'Superb!';
+              break;
+            case 7:
+              this.encourager = 'Incredible!';
+              break;
+            case 8:
+              this.encourager = 'Outstanding!';
+              break;
+            case 9:
+              this.encourager = 'Unbelievable!';
+              break;
+            default:
+              this.encourager = 'Have mercy!';
+          }
+        }
+        this.gameMessage = message;
+      } else {
+        this.gameMessage = 'Woops! Wrong guess!';
+      }
+    }
   };
 
   ngOnInit() {
