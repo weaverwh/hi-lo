@@ -134,15 +134,13 @@ export class AppComponent implements OnInit {
   };
 
   discardStack = () => {
-    if (this.numberOfCards > 1) {
-      this.drawnCards[this.numberOfCards - 1].discarding = true;
-      setTimeout(() => {
-        this.drawnCards[this.numberOfCards - 1].discarded = true;
-        this.updateScore();
-        this.drawnCards = [];
-        this.numberOfCards = 0;
-      }, 500);
-    }
+    this.drawnCards[this.numberOfCards - 1].discarding = true;
+    setTimeout(() => {
+      this.drawnCards[this.numberOfCards - 1].discarded = true;
+      this.updateScore();
+      this.drawnCards = [];
+      this.numberOfCards = 0;
+    }, 500);
   };
 
   updateScore = () => {
@@ -207,6 +205,35 @@ export class AppComponent implements OnInit {
       default:
         this.encourager = 'Have mercy!';
     }
+  };
+
+  resetGame = () => {
+    if (this.drawnCards.length > 0) {
+      this.discardStack();
+      setTimeout(() => {
+        this.resetApp();
+      }, 500);
+    } else {
+      this.resetApp();
+    }
+  };
+
+  resetApp = () => {
+    this.drawnCards = [];
+    this.numberOfCards = 0;
+    this.gameMessage = 'Draw a card to start playing!';
+    this.guessCorrect = true;
+    this.encourager = '';
+    this.numberOfCorrectGuesses = 0;
+    this.numberOfRemainingCards = 52;
+    this.player1 = {
+      score: 0,
+      turnActive: true
+    };
+    this.player2 = {
+      score: 0,
+      turnActive: false
+    };
   };
 
   ngOnInit() {

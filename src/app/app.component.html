@@ -33,6 +33,9 @@
     <div class="encourager" [ngClass]="{'active': numberOfCorrectGuesses > 1}">
       <span>{{encourager}}</span>
     </div>
+    <div class="reset" [ngClass]="{'active': numberOfCorrectGuesses > 1}">
+      <a class="button" (click)="resetGame()">Reset</a>
+    </div>
   </div>
   <div class="playerContainer">
     <div class="player player1">

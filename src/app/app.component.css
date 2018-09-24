@@ -132,18 +132,6 @@
   text-align: center;
 }
 
-.encourager {
-  margin-top: 50px;
-  text-align: center;
-  opacity: 0;
-  transition: all 0.5s ease-out;
-  -webkit-transition: all 0.5s ease-out;
-}
-
-.encourager.active {
-  opacity: 1;
-}
-
 .gameButtons {
   padding-top: 50px;
   width: 260px;
@@ -180,6 +168,23 @@
 
 .passButton {
   margin-top: 15px;
+}
+
+.encourager {
+  margin-top: 50px;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.encourager.active {
+  opacity: 1;
+}
+
+.reset {
+  margin-top: 50px;
+  text-align: center;
 }
 
 .playerContainer {
